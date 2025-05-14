@@ -42,7 +42,6 @@ describe('Clicking "Pusha till stacken"', () => {
 });
 
 // End-to-end test with Selenium
-// End-to-end test for pushing and popping values in the stack
 describe('Gör en E2E: pop() till stacken vilket uppdaterar top på rätt sätt', () => {
     it('should push two values and pop one, showing correct top value', async () => {
         // Push "First" to the stack
