@@ -42,28 +42,42 @@ describe('Clicking "Pusha till stacken"', () => {
 });
 
 // End-to-end test with Selenium
-describe('Custom E2E: popping from stack updates the top correctly', () => {
+// End-to-end test for pushing and popping values in the stack
+describe('Gör en E2E: pop() till stacken vilket uppdaterar top på rätt sätt', () => {
     it('should push two values and pop one, showing correct top value', async () => {
-        // Push "First"
+        // Push "First" to the stack
         let push = await driver.findElement(By.id('push'));
         await push.click();
         let alert = await driver.switchTo().alert();
         await alert.sendKeys("First");
         await alert.accept();
 
-        // Push "Second"
+        // Push "Second" to the stack
         push = await driver.findElement(By.id('push'));
         await push.click();
         alert = await driver.switchTo().alert();
         await alert.sendKeys("Second");
         await alert.accept();
 
-        // Pop once
-        const pop = await driver.findElement(By.id('pops'));
+        // Now pop from the stack
+        const pop = await driver.findElement(By.id('pop'));
         await pop.click();
 
-        // Check that the top is now "First"
-        let top = await driver.findElement(By.id('top_of_stack')).getText();
+        // Wait for the top element to become visible
+        let topElement = await driver.wait(until.elementIsVisible(driver.findElement(By.id('top_of_stack'))), 5000);
+        let top = await topElement.getText();
+
+        // Assert that the top of the stack is "First"
         expect(top).toBe("First");
+
+        // Handle any unexpected alert that may appear after the pop operation
+        try {
+            await driver.wait(until.alertIsPresent(), 2000); // Shorter timeout for unexpected alert
+            let alert = await driver.switchTo().alert();
+            console.log('Unexpected alert detected: ' + await alert.getText());
+            await alert.dismiss(); // Dismiss any unexpected alert
+        } catch (error) {
+            console.log('No unexpected alert appeared');
+        }
     });
 });
