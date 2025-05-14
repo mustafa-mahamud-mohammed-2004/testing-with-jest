@@ -1,7 +1,7 @@
-const stack = require('../src/stack');
+const stack = require('../src/stack.js');
 
-describe('A Custom stack test: handles empty pop', () => {
-    test('popping from empty stack should return undefined', () => {
+describe('Ett stack test: hanterar tomma pops', () => {
+    test('poppar från tom stacks borde returnera undefined', () => {
         expect(stack.pop()).toBeUndefined();
     });
 });
