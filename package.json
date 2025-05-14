@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/mustafa-mahamud-mohammed-2004/testing-with-jest/issues"
   },
-  "homepage": "https://github.com/mustafa-mahamud-mohammed-2004/testing-with-jest#readme"
+  "homepage": "https://github.com/mustafa-mahamud-mohammed-2004/testing-with-jest#readme",
+  "dependencies": {
+    "underscore": "^1.13.7"
+  }
 }
