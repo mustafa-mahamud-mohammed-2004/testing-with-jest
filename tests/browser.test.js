@@ -40,3 +40,30 @@ describe('Clicking "Pusha till stacken"', () => {
         await alert.accept();
     });
 });
+
+// End-to-end test with Selenium
+describe('Custom E2E: popping from stack updates the top correctly', () => {
+    it('should push two values and pop one, showing correct top value', async () => {
+        // Push "First"
+        let push = await driver.findElement(By.id('push'));
+        await push.click();
+        let alert = await driver.switchTo().alert();
+        await alert.sendKeys("First");
+        await alert.accept();
+
+        // Push "Second"
+        push = await driver.findElement(By.id('push'));
+        await push.click();
+        alert = await driver.switchTo().alert();
+        await alert.sendKeys("Second");
+        await alert.accept();
+
+        // Pop once
+        const pop = await driver.findElement(By.id('pops'));
+        await pop.click();
+
+        // Check that the top is now "First"
+        let top = await driver.findElement(By.id('top_of_stack')).getText();
+        expect(top).toBe("First");
+    });
+});
